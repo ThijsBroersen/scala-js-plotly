@@ -1,10 +1,17 @@
 language: scala
 scala:
   - 2.11.12
-  - 2.12.7
+  - 2.12.8
+  - 2.13.0
 jdk:
   - oraclejdk8
+before_install: git fetch --tags
+script: sbt ci-release
+before_cache:
+  - find $HOME/.sbt -name "*.lock" -delete
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -delete
 cache:
   directories:
     - $HOME/.ivy2/cache
-    - $HOME/.sbt
+    - $HOME/.sbt/boot
+    - $HOME/.coursier
